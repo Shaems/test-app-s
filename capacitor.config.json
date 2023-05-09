@@ -1,0 +1,6 @@
+{
+	"appId": "io.testApp",
+	"appName": "test_app",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding bg-img">
+  <section>
+    <div class="onboarding">
+      <div>
+        <ion-icon name="chevron-forward-circle-outline" style="font-size: 5rem;"></ion-icon>
+        <h4 class="title">Test_app</h4>
+      </div>
+    </div>
+  
+    <ion-button class="btn-primary" expand="block" (click)="goLogin('login')">Iniciar sesión</ion-button>
+    <ion-button class="btn-tertiary" expand="block" (click)="goLogin('login-layout')">Iniciar sesión maquetación</ion-button>
+  </section>
+</ion-content>

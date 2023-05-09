@@ -1,0 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div *ngFor="let field of fields">
+    <div *ngIf="field.type != 'toggle'">
+      <ion-item>
+        <ion-icon [name]="field.iconName"></ion-icon>
+        <ion-input
+          [type]="field.type"
+          [placeholder]="field.placeholder"
+          [formControlName]="field.formControlName"
+        ></ion-input>
+      </ion-item>
+      <ion-note *ngIf="form.controls[field.formControlName].invalid && loginError" color="danger" class="error-message" stacked>{{getErrorMessage(field)}}</ion-note>
+    </div>
+    <div *ngIf="field.type == 'toggle'">
+      <ion-item class="toggle-content">
+        <ion-toggle justify="space-between" [formControlName]="field.formControlName">Recordar</ion-toggle>
+      </ion-item>
+    </div>
+  </div>
+  <ion-button class="btn-primary" expand="block" type="submit">Acceder</ion-button>
+</form>

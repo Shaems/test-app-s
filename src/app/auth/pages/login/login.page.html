@@ -1,0 +1,13 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding bg">
+  <div class="avatar-content">
+    <ion-avatar class="custom-avatar">
+      <img alt="Logo" src="./../../../../assets/img/logo.jpg" />
+    </ion-avatar>
+  </div>
+  
+   <app-form [fields]="fields" (submitEvent)="login($event)"></app-form>
+  
+</ion-content>

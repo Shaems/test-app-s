@@ -1,0 +1,17 @@
+.onboarding {
+    height: 70vh;
+    align-items: center;
+    display: flex;
+
+    .title {
+        font-weight: 600;
+        font-size: 2rem;
+    }
+}
+
+@media screen and (min-width: 960px) {
+    section {
+      width: 30rem;
+      margin: auto;
+    }
+}
