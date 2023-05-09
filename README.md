@@ -28,15 +28,18 @@ ionic serve
 ## Diseño
 
 Onboarding
+
 ![onb](https://github.com/Shaems/test-app-s/assets/53309793/ee97f035-193e-4f0a-ab40-4fda90194f1a)
 
 
 Se realizaron dos diseños:
 - 'Iniciar sesión' con un 'diseño propio'.
+
 ![login](https://github.com/Shaems/test-app-s/assets/53309793/3308cf15-7976-4406-991c-0950833d68f6)
 
 
 - 'Iniciar sesión maquetación' donde se respeto el diseño propuesto.
+
 ![login2](https://github.com/Shaems/test-app-s/assets/53309793/0988f40c-4a05-4fb0-9fec-9ec99638a4fc)
 
 
