@@ -15,14 +15,14 @@
           <ion-input placeholder="Email" type="email" formControlName="email"></ion-input>
         </ion-item>
         <ion-item *ngIf="emailCtrl.invalid && loginError">
-          <ion-label color="danger" class="error-message" stacked>{{ emailCtrl.errors ? (emailCtrl.errors['required'] ? 'El email es requerido.' : 'El email no es válido.') : '' }}</ion-label>
+          <ion-label color="danger" class="error-message" stacked>{{getErrorMessage()}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-icon name="lock-closed-outline"></ion-icon>
           <ion-input placeholder="Contraseña" type="password" formControlName="password"></ion-input>
         </ion-item>
         <ion-item *ngIf="passwordCtrl.invalid && loginError">
-          <ion-label color="danger" class="error-message" stacked>{{ passwordCtrl.errors ? (passwordCtrl.errors['required'] ? 'La contraseña es requerida.' : 'La contraseña debe tener al menos 5 caracteres.') : '' }}</ion-label>
+          <ion-label color="danger" class="error-message" stacked>{{getErrorMessage()}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-toggle justify="space-between" formControlName="rememberPassword">Recordar</ion-toggle>

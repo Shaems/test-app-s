@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { FieldConfig } from '../../interfaces/fieldConfig';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -9,14 +9,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class FormComponent  implements OnInit {
 
+  private fb = inject(FormBuilder)
   form: FormGroup;
 
   @Input() fields!: FieldConfig[];
   @Output() submitEvent = new EventEmitter<{ [key: string]: string | boolean }>();
 
-  loginError: boolean = false;
+  loginError = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor() {
     this.form = this.fb.group({});
   }
 
