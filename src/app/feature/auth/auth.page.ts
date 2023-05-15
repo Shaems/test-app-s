@@ -6,14 +6,11 @@ import { Router } from '@angular/router';
   templateUrl: './auth.page.html',
   styleUrls: ['./auth.page.scss'],
 })
-export class AuthPage implements OnInit {
+export class AuthPage {
 
   constructor(
     private router: Router
   ) { }
-
-  ngOnInit() {
-  }
 
   goLogin(url: string){
     this.router.navigateByUrl(`auth/${url}`);

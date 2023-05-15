@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertService } from 'src/app/services/alert-service/alert.service';
-import { LoginForm } from '../../interfaces/loginForm';
-import { AuthService } from '../../services/auth-service/auth.service';
-import { LoaderService } from 'src/app/services/loader-service/loader.service';
+import { AlertService } from 'src/app/shared/services/alert-service/alert.service';
+import { LoginForm } from '../../shared/interfaces/login/loginForm';
+import { AuthService } from '../../shared/services/auth-service/auth.service';
+import { LoaderService } from 'src/app/shared/services/loader-service/loader.service';
 
 @Component({
   selector: 'app-login-layout',
@@ -57,7 +57,7 @@ export class LoginLayoutPage {
       next: res => {
         this.loaderService.dimissLoading();
         console.log(res)
-        localStorage.setItem('token', '123456');
+        localStorage.setItem('token', res.token);
         this.router.navigateByUrl('home')
       },
       error: err => {

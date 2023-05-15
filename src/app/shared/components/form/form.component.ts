@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { FieldConfig } from '../../interfaces/fieldConfig';
+import { FieldConfig } from '../../interfaces/form/fieldConfig';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
