@@ -50,15 +50,11 @@ Se realizaron dos diseños:
 
 ## Test
 
-- Pruebas unitarias.
+- Pruebas unitarias - Coverage 100%
 - Test de integración con Cypress.
 
 ## Posibles mejoras
-<<<<<<< HEAD
-=======
 
->>>>>>> ba718fbd08e5a4f5e73f524014cb6e4987370f56
-- Implementar más pruebas unitarias que den cobertura a los metodos implementados.
 - Mejoras de diseño de UX/UI.
 
 ## Por Yael De Maio
