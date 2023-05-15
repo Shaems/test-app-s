@@ -1,7 +1,7 @@
 import { NgModule, inject } from '@angular/core';
 import { PreloadAllModules, Router, RouterModule, Routes } from '@angular/router';
-import { AuthService } from './auth/services/auth-service/auth.service';
-import { AuthGuard } from './auth/guards/auth.guard';
+import { AuthService } from './shared/services/auth-service/auth.service';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -11,11 +11,11 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule)
+    loadChildren: () => import('./feature/auth/auth.module').then( m => m.AuthPageModule)
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    loadChildren: () => import('./feature/home/home.module').then( m => m.HomePageModule),
     canActivate: [AuthGuard]
   },
 ];

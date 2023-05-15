@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding bg-img">
+  <div class="avatar-content">
+    <ion-avatar class="custom-avatar">
+      <img alt="Logo" src="./../../../../assets/img/logo.jpg" />
+    </ion-avatar>
+  </div>
+  <ion-card class="card-form-login">
+    <ion-list>
+      <form [formGroup]="loginForm"  (ngSubmit)="valid()">
+        <ion-item>
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-input placeholder="Email" type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="emailCtrl.invalid && loginError">
+          <ion-label color="danger" class="error-message" stacked>{{getErrorMessage()}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <ion-input placeholder="Contraseña" type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="passwordCtrl.invalid && loginError">
+          <ion-label color="danger" class="error-message" stacked>{{getErrorMessage()}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-toggle justify="space-between" formControlName="rememberPassword">Recordar</ion-toggle>
+        </ion-item>
+        <ion-button id="button" expand="full" type="submit">Acceder</ion-button>
+      </form>
+    </ion-list>
+  </ion-card>
+</ion-content>

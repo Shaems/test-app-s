@@ -9,15 +9,12 @@ describe('FormComponent', () => {
   let component: FormComponent;
   let fixture: ComponentFixture<FormComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ FormComponent ],
-      imports: [IonicModule.forRoot(), ReactiveFormsModule],
-    })
-    .compileComponents();
-  });
-
   beforeEach(() => {
+     TestBed.configureTestingModule({
+      declarations: [ FormComponent ],
+      imports: [IonicModule.forRoot(),
+        ReactiveFormsModule],
+    })
     fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
     component.fields = [
@@ -48,17 +45,81 @@ describe('FormComponent', () => {
     fixture.detectChanges();
   });
 
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show error message when email field is invalid and loginError is true', () => {
+  it('should show be invalid when email incorrect', () => {
     const emailField = component.form.controls['email'];
     emailField.setValue('invalid-email');
-    component.loginError = true;
     fixture.detectChanges();
-    const errorMessage = fixture.nativeElement.querySelector('.error-message');
-    expect(errorMessage.textContent.trim()).toBe('El email no es válido.');
+    component.submit();
+    
+    expect(component.form.invalid).toBeTruthy();
+  });
+
+  it('should show be invalid when password incorrect', () => {
+    component.form.controls['password'].setValue('1234');
+    fixture.detectChanges();
+
+    component.submit();
+
+    expect(component.loginError).toBeTruthy();
+    expect(component.form.invalid).toBeTruthy();
+    expect(component.loginError).toBe(true);
+  });
+
+  it('should emit submitEvent with correct values when form is valid', () => {
+    component.form.controls['email'].setValue('valid-email@example.com');
+    component.form.controls['password'].setValue('Hola1234');
+
+    let emittedValues: { [key: string]: string | boolean } | undefined;
+    component.submitEvent.subscribe((values) => {
+      emittedValues = values;
+    });
+    component.submit();
+
+    expect(emittedValues).toEqual({email: 'valid-email@example.com', password: 'Hola1234'});
+  });
+
+  it('should emit submitEvent with incorrect values when form is invalid', () => {
+    component.form.controls['email'].setValue('invalid-email');
+    component.form.controls['password'].setValue('Hola1234');
+
+    let emittedValues: { [key: string]: string | boolean } | undefined;
+    component.submitEvent.subscribe((values) => {
+      emittedValues = values;
+    });
+    component.submit();
+
+    //event not emitted
+    expect(emittedValues).toBeUndefined()
+  });
+
+  it('should return an empty string for a email without errors', () => {
+    component.form.controls['email'].setErrors(null);
+    const errorMessage = component.getErrorMessage(component.fields[0]);
+
+    expect(errorMessage).toEqual('');
+  });
+
+  it('should return correct error message for a email with errors', () => {
+    component.form.controls['email'].setValue('invalid-email');
+    const errorMessage = component.getErrorMessage(component.fields[0]);
+
+    expect(errorMessage).toEqual('El email no es válido.');
+  });
+
+  it('should return correct error message for a form with required', () => {
+    component.form.controls['email'].setValue('');
+    component.form.controls['password'].setValue('');
+    fixture.detectChanges();
+
+    const errorMessage = component.getErrorMessage(component.fields[0]);
+
+    expect(component.form.invalid).toBeTruthy();
+    expect(errorMessage).toEqual('El email es requerido.', 'La contraseña es requerida.');
   });
 
   it('should show error message when email field is null and loginError is true', () => {
@@ -88,28 +149,4 @@ describe('FormComponent', () => {
     expect(errorMessage).toBeFalsy();
   });
 
-  it('should not emit submitEvent when form is invalid and submit button is clicked', () => {
-    spyOn(component.submitEvent, 'next');
-    component.form.setValue({
-      email: 'valid-email@example.com',
-      password: 'valid-password',
-    });
-    const form = fixture.debugElement.query(By.css('form'));
-    form.triggerEventHandler('ngSubmit', null);
-    fixture.detectChanges();
-
-    expect(component.submitEvent.next).not.toHaveBeenCalled();
-  });
-
-  it('should emit login event when form is valid and submit button is clicked', () => {
-    spyOn(component, 'submit');
-    component.form.setValue({
-      email: 'valid-email@example.com',
-      password: 'valid-password',
-    });
-    const form = fixture.debugElement.query(By.css('form'));
-    form.triggerEventHandler('ngSubmit', null);
-    fixture.detectChanges();
-    expect(component.submit).toHaveBeenCalled();
-  });
 });
