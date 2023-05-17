@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginLayoutPage } from './login-layout.page';
-import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../shared/services/auth-service/auth.service';
@@ -22,6 +21,9 @@ describe('LoginLayoutPage', () => {
   let routerSpy: jasmine.SpyObj<Router>;
   let loaderServiceSpy: jasmine.SpyObj<LoaderService>;
   let alertServiceSpy: jasmine.SpyObj<AlertService>;
+
+  let validEmail = 'valid-email@example.com';
+  let validPassword = 'Hola1234';
 
   let loginResponse = {
     status: 'OK',
@@ -64,8 +66,6 @@ describe('LoginLayoutPage', () => {
   });
 
   describe('validate click on submit', () => {
-    const validEmail = 'valid-email@example.com';
-    const validPassword = 'Hola1234';
 
     it('should show be invalid when password incorrect', () => {
       emailControl.setValue(validEmail);
@@ -145,19 +145,11 @@ describe('LoginLayoutPage', () => {
   });
 
   describe('call login()', () => {
-    const validEmail = 'valid-email@example.com';
-    const validPassword = 'Hola1234';
     const dataForm = {
       email: validEmail,
       password: validPassword,
       rememberPassword: false
     }
-
-    const loginResponse = {
-      status: 'OK',
-      token: '123456789'
-    }
-
 
     it('when send valid values', () => {
       component.loginForm.setValue(dataForm);
