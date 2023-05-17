@@ -46,7 +46,7 @@ export class LoginLayoutPage {
     }
   }
 
-  login() {
+  private login() {
     this.loaderService.showLoading();
     let dataForm: LoginForm = {
       email: this.loginForm.value.email as string,

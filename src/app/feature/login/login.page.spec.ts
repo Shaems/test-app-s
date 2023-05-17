@@ -4,7 +4,6 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '../../shared/services/auth-service/auth.service';
 import { of, throwError } from 'rxjs';
-import { By } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AlertService } from 'src/app/shared/services/alert-service/alert.service';
@@ -27,7 +26,7 @@ describe('LoginPage', () => {
   beforeEach(() => {
 
     authServiceSpy = jasmine.createSpyObj('AuthService', ['login'])
-    authServiceSpy.login.and.returnValue(of('OK'))
+    authServiceSpy.login.and.returnValue(of(loginResponse))
     routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
     loaderServiceSpy = jasmine.createSpyObj('LoaderService', ['showLoading', 'dimissLoading']);
     alertServiceSpy = jasmine.createSpyObj('LoaderService', ['alert']);
@@ -61,12 +60,6 @@ describe('LoginPage', () => {
       rememberPassword: false
     }
 
-    const loginResponse = {
-      status: 'OK',
-      token: '123456789'
-    }
-
-
     it('when send valid values', () => {
       component.login(dataForm);
 
@@ -77,7 +70,6 @@ describe('LoginPage', () => {
 
     it('should set error on error', () => {
       authServiceSpy.login.and.returnValue(throwError(() => new Error('Error message')));
-
       component.login(dataForm);
 
       expect(routerSpy.navigateByUrl).not.toHaveBeenCalled();

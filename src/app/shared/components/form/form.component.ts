@@ -9,17 +9,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class FormComponent  implements OnInit {
 
-  private fb = inject(FormBuilder)
-  form: FormGroup;
-
   @Input() fields!: FieldConfig[];
   @Output() submitEvent = new EventEmitter<{ [key: string]: string | boolean }>();
 
-  loginError = false;
+  private fb = inject(FormBuilder)
 
-  constructor() {
-    this.form = this.fb.group({});
-  }
+  form: FormGroup = this.fb.group({});
+  loginError = false;
 
   ngOnInit() {
     this.fields.forEach((field) => {

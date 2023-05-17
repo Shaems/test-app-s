@@ -88,19 +88,6 @@ describe('LoginLayoutPage', () => {
       expect(component.loginError).toBeTruthy();
     });
 
-    it('should login when valid values', () => {
-      spyOn(component, 'login');
-
-      emailControl.setValue(validEmail);
-      passwordControl.setValue(validPassword);
-      fixture.detectChanges();
-
-      component.valid();
-
-      expect(component.loginForm.valid).toBeTruthy();
-      expect(component.login).toHaveBeenCalled();
-    });
-
     it('should return correct error message for a email with invalid', () => {
       emailControl.setValue('email-invalid');
       fixture.detectChanges();
@@ -175,7 +162,7 @@ describe('LoginLayoutPage', () => {
     it('when send valid values', () => {
       component.loginForm.setValue(dataForm);
 
-      component.login();
+      component.valid();
 
       expect(loaderServiceSpy.showLoading).toHaveBeenCalled();
       expect(authServiceSpy.login).toHaveBeenCalledWith(dataForm);
@@ -186,7 +173,7 @@ describe('LoginLayoutPage', () => {
       authServiceSpy.login.and.returnValue(throwError(() => new Error('Error message')));
 
       component.loginForm.setValue(dataForm);
-      component.login();
+      component.valid();
 
       expect(component.loginForm.valid).toBeTruthy();
       expect(routerSpy.navigateByUrl).not.toHaveBeenCalled();

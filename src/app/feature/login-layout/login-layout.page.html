@@ -8,18 +8,18 @@
     </ion-avatar>
   </div>
   <ion-card class="card-form-login">
-    <ion-list>
+    <ion-list class="list">
       <form [formGroup]="loginForm"  (ngSubmit)="valid()">
         <ion-item>
           <ion-icon name="person-outline"></ion-icon>
-          <ion-input placeholder="Email" type="email" formControlName="email"></ion-input>
+          <ion-input placeholder="Email" type="email" formControlName="email" class="input"></ion-input>
         </ion-item>
         <ion-item *ngIf="emailCtrl.invalid && loginError">
           <ion-label color="danger" class="error-message" stacked>{{getErrorMessage()}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-icon name="lock-closed-outline"></ion-icon>
-          <ion-input placeholder="Contraseña" type="password" formControlName="password"></ion-input>
+          <ion-input placeholder="Contraseña" type="password" formControlName="password" class="input"></ion-input>
         </ion-item>
         <ion-item *ngIf="passwordCtrl.invalid && loginError">
           <ion-label color="danger" class="error-message" stacked>{{getErrorMessage()}}</ion-label>
@@ -27,7 +27,7 @@
         <ion-item>
           <ion-toggle justify="space-between" formControlName="rememberPassword">Recordar</ion-toggle>
         </ion-item>
-        <ion-button id="button" expand="full" type="submit">Acceder</ion-button>
+        <ion-button id="button" expand="full" type="submit" class="btn">Acceder</ion-button>
       </form>
     </ion-list>
   </ion-card>
