@@ -26,8 +26,7 @@
   },
   "exclude": [
     "./cypress.config.ts",
-    "cypress",
-    "**/*.cy.tsx"
+    "cypress"
   ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

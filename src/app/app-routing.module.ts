@@ -1,6 +1,5 @@
-import { NgModule, inject } from '@angular/core';
-import { PreloadAllModules, Router, RouterModule, Routes } from '@angular/router';
-import { AuthService } from './shared/services/auth-service/auth.service';
+import { NgModule } from '@angular/core';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
