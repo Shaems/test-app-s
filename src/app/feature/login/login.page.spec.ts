@@ -12,9 +12,9 @@ import { LoaderService } from 'src/app/shared/services/loader-service/loader.ser
 describe('LoginPage', () => {
   let component: LoginPage;
   let fixture: ComponentFixture<LoginPage>;
+  let router: Router;
 
   let authServiceSpy: { login: jasmine.Spy }
-  let routerSpy: jasmine.SpyObj<Router>;
   let loaderServiceSpy: jasmine.SpyObj<LoaderService>;
   let alertServiceSpy: jasmine.SpyObj<AlertService>;
 
@@ -27,25 +27,24 @@ describe('LoginPage', () => {
 
     authServiceSpy = jasmine.createSpyObj('AuthService', ['login'])
     authServiceSpy.login.and.returnValue(of(loginResponse))
-    routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
     loaderServiceSpy = jasmine.createSpyObj('LoaderService', ['showLoading', 'dimissLoading']);
     alertServiceSpy = jasmine.createSpyObj('LoaderService', ['alert']);
 
     TestBed.configureTestingModule({
       declarations: [ LoginPage ],
       imports: [
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([]),
         HttpClientModule
       ],
       providers: [
         { provide: AuthService, useValue:  authServiceSpy },
-        { provide: Router, useValue: routerSpy },
         { provide: LoaderService, useValue: loaderServiceSpy },
         { provide: AlertService, useValue: alertServiceSpy },
         FormBuilder,
         ReactiveFormsModule
       ]
     })
+    router = TestBed.inject(Router);
     fixture = TestBed.createComponent(LoginPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -61,18 +60,20 @@ describe('LoginPage', () => {
     }
 
     it('when send valid values', () => {
+      const navigateSpy = spyOn(router, 'navigateByUrl');
       component.login(dataForm);
 
       expect(loaderServiceSpy.showLoading).toHaveBeenCalled();
       expect(authServiceSpy.login).toHaveBeenCalledWith(dataForm);
-      expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('home');
+      expect(navigateSpy).toHaveBeenCalledWith('home');
     });
 
     it('should set error on error', () => {
+      const navigateSpy = spyOn(router, 'navigateByUrl');
       authServiceSpy.login.and.returnValue(throwError(() => new Error('Error message')));
       component.login(dataForm);
 
-      expect(routerSpy.navigateByUrl).not.toHaveBeenCalled();
+      expect(navigateSpy).not.toHaveBeenCalled();
       expect(authServiceSpy.login).toHaveBeenCalled();
       expect(loaderServiceSpy.dimissLoading).toHaveBeenCalled();
       expect(alertServiceSpy.alert).toHaveBeenCalledWith('Error', 'Error message');

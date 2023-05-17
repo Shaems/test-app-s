@@ -9,7 +9,6 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/shared/services/loader-service/loader.service';
 import { AlertService } from 'src/app/shared/services/alert-service/alert.service';
-import { HomePage } from '../home/home.page';
 
 describe('LoginLayoutPage', () => {
   let component: LoginLayoutPage;
